@@ -1,0 +1,22 @@
+[mysqld]
+datadir=/mysql/data
+socket=/tmp/mysql.sock
+user=mysql
+
+
+
+
+# Slow query log
+slow-query-log
+slow-query-log-file=/mysql/logs/<%= hostname %>.mysql-slow.log
+
+long-query-time=3
+log-queries-not-using-index
+
+
+
+[mysqld_safe]
+log-error=/mysql/logs/<%= hostname %>.mysql-error.log
+pid-file=/mysql/mysqld.pid
+
+

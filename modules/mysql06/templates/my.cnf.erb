@@ -1,0 +1,19 @@
+[mysqld]
+datadir=/mysql/data
+socket=/tmp/mysql.sock
+user=mysql
+
+
+
+
+# IP only
+skip-name-resolve
+
+
+
+
+[mysqld_safe]
+log-error=/mysql/logs/<%= hostname %>.mysql-error.log
+pid-file=/mysql/mysqld.pid
+
+
