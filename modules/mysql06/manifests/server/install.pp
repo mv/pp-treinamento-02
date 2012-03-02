@@ -19,17 +19,18 @@ class mysql06::server::install {
     }
 
     service { "mysql":
-        name   => "${mysql06::params::service_name}",
+        name    => "${mysql06::params::service_name}",
         ensure  => running,
-        require => File["mysql"],
+        require => [ File["mysql"], User["mysql"] ],
     }
 
     user { "mysql":
-        ensure => present,
-        uid    => 27,
-        gid    => 27,
-        home   => '/var/empty/mysql',
-        shell  => '/sbin/nologin',
+        ensure  => present,
+        uid     => 27,
+        gid     => 27,
+        home    => '/var/empty/mysql',
+        shell   => '/sbin/nologin',
+        require => Group["mysql"]
     }
 
     group { "mysql":
@@ -44,15 +45,15 @@ class mysql06::server::install {
         mode   => '0755',
     }
 
-
     file { ["/mysql",
             "/mysql/data",
             "/mysql/logs",
             ]:
-        ensure => directory,
-        owner  => 'mysql',
-        group  => 'mysql',
-        mode   => '0775',
+        ensure  => directory,
+        owner   => 'mysql',
+        group   => 'mysql',
+        mode    => '0775',
+        require => User["mysql"]
     }
 
 

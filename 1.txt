@@ -1,0 +1,64 @@
+1)
+modules
+  mysql
+    manifests
+        init.pp
+    files
+        my.cnf
+    templates
+        my.cnf.erb
+
+mkdir manifests
+touch manifests/site.pp
+
+mkdir -p modules/mysql01/{manifests,files,templates}
+touch    modules/mysql01/manifests/init.pp
+
+puppet --modulepath ./modules manifests/site.pp
+puppet --modulepath ./modules -e 'include mysql01'
+
+# Curiosidade
+puppet -e 'file {"/tmp/test.txt": ensure =>  present, owner => nobody}'
+
+2)
+modules
+  mysql
+    manifests
+        init.pp
+    files
+        my.cnf
+    templates
+        my.cnf.erb
+        my.cnf.erb.prod
+        my.cnf.erb.db03
+
+  ntp
+    manifests
+        init.pp
+    files
+        ntp.conf
+        ntp.conf.dc1
+        ntp.conf.dc2
+
+3)
+    ntp
+      manifests
+        init.pp
+        params.pp
+        install.pp
+        remove.pp
+        absent.pp
+
+    mysql
+      manifests
+        init.pp
+        params.pp
+        server/
+           install.pp
+           absent.pp
+        client/
+           install.pp
+           absent.pp
+
+Class
+
