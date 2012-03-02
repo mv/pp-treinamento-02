@@ -7,6 +7,12 @@ class mysql05::params {
         default    => "mysql",
     }
 
+    $depend_on_client = $operatingsystem ? {
+        redhat  => "perl-DBD-MySQL",
+        centos  => "perl-DBD-MySQL",
+        default => "",
+    }
+
     $pkg_name_server = $operatingsystem ? {
         redhat     => "mysql-server",
         centos     => "mysql-server",

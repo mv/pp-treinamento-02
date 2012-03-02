@@ -11,6 +11,8 @@ class mysql06::params {
     }
 
     $depend_on_client = $operatingsystem ? {
+        redhat  => "perl-DBD-MySQL",
+        centos  => "perl-DBD-MySQL",
         default => "",
     }
 
